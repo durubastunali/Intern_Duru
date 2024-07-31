@@ -9,8 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bff072e9-03c6-41a6-b7f1-6a46f00a38a0" name="Changes" comment="jar - manifest">
+    <list default="true" id="bff072e9-03c6-41a6-b7f1-6a46f00a38a0" name="Changes" comment="Ana menü buttonları ve stage isimlerinde değişiklik">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/Database/Filter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/Database/Filter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +84,7 @@
       <workItem from="1722405902602" duration="7707000" />
       <workItem from="1722414237098" duration="442000" />
       <workItem from="1722415735117" duration="838000" />
-      <workItem from="1722424036482" duration="3486000" />
+      <workItem from="1722424036482" duration="5497000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -117,7 +118,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722414119931</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Ana menü buttonları ve stage isimlerinde değişiklik">
+      <option name="closed" value="true" />
+      <created>1722430328189</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1722430328189</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -131,7 +140,8 @@
     <MESSAGE value="Resources" />
     <MESSAGE value="Dosyalar resource'tan alınıyor." />
     <MESSAGE value="jar - manifest" />
-    <option name="LAST_COMMIT_MESSAGE" value="jar - manifest" />
+    <MESSAGE value="Ana menü buttonları ve stage isimlerinde değişiklik" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ana menü buttonları ve stage isimlerinde değişiklik" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -47,11 +47,11 @@ public class Filter {
         }
         VBox layoutTable = new VBox(10);
         layoutTable.setPadding(new Insets(0, 0, 25, 0));
-        filterByName(layoutTable, salesInfo, editInfo, cancelInfo, sqlWhere);
+        filter(layoutTable, salesInfo, editInfo, cancelInfo, sqlWhere);
     }
 
 
-    private void filterByName(VBox layoutTable, Label salesInfo, Label editInfo, Label cancelInfo, String sqlWhere) {
+    private void filter(VBox layoutTable, Label salesInfo, Label editInfo, Label cancelInfo, String sqlWhere) {
 
         Path resourcesDirectory = Paths.get("resources");
         String dbPath = resourcesDirectory + "\\db\\SFA_DB";
