@@ -10,6 +10,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +28,8 @@ public class SFA {
         VBox fileLayout = new VBox();
         fileLayout.setPadding(new Insets(30));
 
-        String dbPath = "C:\\Users\\durub\\OneDrive\\Desktop\\Intern-Files\\db\\db\\SFA_DB";
+        Path resourcesDirectory = Paths.get("resources");
+        String dbPath = resourcesDirectory + "\\db\\SFA_DB";
         DatabaseConnector.setUrl(dbPath);
 
         VBox layoutTable = new VBox(10);

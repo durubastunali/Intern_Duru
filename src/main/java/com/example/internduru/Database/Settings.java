@@ -8,6 +8,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +26,8 @@ public class Settings {
         VBox fileLayout = new VBox();
         fileLayout.setPadding(new Insets(30));
 
-        String dbPath = "C:\\Users\\durub\\OneDrive\\Desktop\\Intern-Files\\db\\settings\\Settings.db";
+        Path resourcesDirectory = Paths.get("resources");
+        String dbPath = resourcesDirectory + "\\db\\Settings.db";
         DatabaseConnector.setUrl(dbPath);
 
         VBox layoutTable = new VBox(10);

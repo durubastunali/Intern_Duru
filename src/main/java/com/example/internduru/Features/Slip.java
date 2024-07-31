@@ -1,5 +1,6 @@
 package com.example.internduru.Features;
 
+import com.example.internduru.Database.DatabaseConnector;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
@@ -40,7 +41,9 @@ public class Slip {
     }
 
     private void loadSlipFiles(ComboBox<String> fileComboBox, VBox fileLayout) {
-        String path = "C:\\Users\\durub\\OneDrive\\Desktop\\Intern-Files\\slips";
+        Path resourcesDirectory = Paths.get("resources");
+        String path = resourcesDirectory + "\\ej\\slips";
+
         try {
             Files.walk(Paths.get(path))
                     .filter(Files::isRegularFile) //Klasörleri seçmeden sadece dosyaları al

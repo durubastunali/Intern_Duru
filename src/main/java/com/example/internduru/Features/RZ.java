@@ -42,7 +42,9 @@ public class RZ {
     }
 
     private void loadFiles(ComboBox<String> fileComboBox, VBox fileLayout) {
-        String path = "C:\\Users\\durub\\OneDrive\\Desktop\\Intern-Files\\R_Z_Files";
+        Path resourcesDirectory = Paths.get("resources");
+        String path = resourcesDirectory + "\\ej\\z";
+
         try {
             Files.walk(Paths.get(path)) //directoryde ve alt directorylerinde gez
                     .filter(Files::isRegularFile) //klasörleri seçmeden sadece dosyaları seç

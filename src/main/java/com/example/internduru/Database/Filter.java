@@ -10,6 +10,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,7 +52,9 @@ public class Filter {
 
 
     private void filterByName(VBox layoutTable, Label salesInfo, Label editInfo, Label cancelInfo, String sqlWhere) {
-        String dbPath = "C:\\Users\\durub\\OneDrive\\Desktop\\Intern-Files\\db\\db\\SFA_DB";
+
+        Path resourcesDirectory = Paths.get("resources");
+        String dbPath = resourcesDirectory + "\\db\\SFA_DB";
         DatabaseConnector.setUrl(dbPath);
 
         String sqlQuery = "SELECT " +
@@ -129,8 +133,9 @@ public class Filter {
     }
 
     private void getProductsAndDepartments() {
-        String settingsDBpath = "C:\\Users\\durub\\OneDrive\\Desktop\\Intern-Files\\db\\settings\\Settings.db";
-        DatabaseConnector.setUrl(settingsDBpath);
+        Path resourcesDirectory = Paths.get("resources");
+        String dbPath = resourcesDirectory + "\\db\\Settings.db";
+        DatabaseConnector.setUrl(dbPath);
 
         departmentNames.clear();
         productNamesMap.clear();
