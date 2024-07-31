@@ -1,6 +1,7 @@
-package com.example.hugin_project.Database;
+package com.example.internduru.Database;
 
-import com.example.hugin_project.Features.StageHandler;
+import com.example.internduru.Features.StageHandler;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

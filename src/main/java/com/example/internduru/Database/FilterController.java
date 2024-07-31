@@ -1,4 +1,4 @@
-package com.example.hugin_project.Database;
+package com.example.internduru.Database;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;

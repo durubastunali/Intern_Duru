@@ -1,6 +1,6 @@
-package com.example.hugin_project.Database;
+package com.example.internduru.Database;
 
-import com.example.hugin_project.Features.DatabaseController;
+import com.example.internduru.Features.DatabaseController;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;

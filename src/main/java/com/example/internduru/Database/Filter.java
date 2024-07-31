@@ -1,6 +1,6 @@
-package com.example.hugin_project.Database;
+package com.example.internduru.Database;
 
-import com.example.hugin_project.Features.DatabaseController;
+import com.example.internduru.Features.DatabaseController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;

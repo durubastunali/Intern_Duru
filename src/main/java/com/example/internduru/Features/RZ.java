@@ -1,10 +1,11 @@
-package com.example.hugin_project.Features;
+package com.example.internduru.Features;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;

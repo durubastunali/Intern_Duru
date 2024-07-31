@@ -1,14 +1,17 @@
-package com.example.hugin_project.Features;
+package com.example.internduru.Features;
 
-import com.example.hugin_project.Database.FilterController;
-import com.example.hugin_project.Database.SFA;
-import com.example.hugin_project.Database.Settings;
+import com.example.internduru.Database.FilterController;
+import com.example.internduru.Database.SFA;
+import com.example.internduru.Database.Settings;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Insets;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+
 import java.util.Map;
 import java.util.function.Consumer;
 

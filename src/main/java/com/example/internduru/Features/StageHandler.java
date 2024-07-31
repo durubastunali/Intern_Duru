@@ -1,4 +1,4 @@
-package com.example.hugin_project.Features;
+package com.example.internduru.Features;
 
 import javafx.application.Application;
 import javafx.application.Platform;
