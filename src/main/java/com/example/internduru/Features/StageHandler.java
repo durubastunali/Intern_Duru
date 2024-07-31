@@ -32,9 +32,9 @@ public class StageHandler extends Application {
     @Override
     public void start(Stage primaryStage) {
         VBox mainLayout = new VBox();
-        buttonFileParser = new Button("Z - R Okuma");
-        buttonSlip = new Button("Slip Bastırma");
-        buttonDatabase = new Button("Database Görüntüleme");
+        buttonFileParser = new Button("Z - R Dosya");
+        buttonSlip = new Button("Slip");
+        buttonDatabase = new Button("Database");
 
         setMenuLayout(mainLayout);
         showMainMenu(mainLayout);
@@ -44,7 +44,7 @@ public class StageHandler extends Application {
         double height = screen.getBounds().getHeight() - 70;
         Scene mainMenuScene = new Scene(mainLayout, width, height);
 
-        primaryStage.setTitle("App");
+        primaryStage.setTitle("Hugin");
         primaryStage.setScene(mainMenuScene);
         primaryStage.show();
     }
