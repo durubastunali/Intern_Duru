@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bff072e9-03c6-41a6-b7f1-6a46f00a38a0" name="Changes" comment="Dosyalar resource'tan alınıyor.">
+    <list default="true" id="bff072e9-03c6-41a6-b7f1-6a46f00a38a0" name="Changes" comment="jar - manifest">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
     </list>
@@ -45,7 +45,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Artifacts",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.4103036",
     "settings.editor.selected.configurable": "preferences.JavaFX",
@@ -81,7 +81,8 @@
       <workItem from="1722349078170" duration="25000" />
       <workItem from="1722349240517" duration="160000" />
       <workItem from="1722349565452" duration="20000" />
-      <workItem from="1722405902602" duration="7668000" />
+      <workItem from="1722405902602" duration="7707000" />
+      <workItem from="1722414237098" duration="442000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -107,7 +108,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722408727728</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="jar - manifest">
+      <option name="closed" value="true" />
+      <created>1722414119931</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1722414119931</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -120,7 +129,8 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Resources" />
     <MESSAGE value="Dosyalar resource'tan alınıyor." />
-    <option name="LAST_COMMIT_MESSAGE" value="Dosyalar resource'tan alınıyor." />
+    <MESSAGE value="jar - manifest" />
+    <option name="LAST_COMMIT_MESSAGE" value="jar - manifest" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
