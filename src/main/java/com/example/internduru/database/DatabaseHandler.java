@@ -1,6 +1,6 @@
-package com.example.internduru.Database;
+package com.example.internduru.database;
 
-import com.example.internduru.Features.StageHandler;
+import com.example.internduru.StageHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -12,6 +12,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DatabaseHandler {
+
+    private DatabaseHandler() { }
+
 
     public static ObservableList<Map<String, Object>> executeCustomQuery(String sqlQuery) {
         ObservableList<Map<String, Object>> data = FXCollections.observableArrayList();

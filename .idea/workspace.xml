@@ -10,8 +10,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bff072e9-03c6-41a6-b7f1-6a46f00a38a0" name="Changes" comment="Ana menü buttonları ve stage isimlerinde değişiklik">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/Database/Filter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/Database/Filter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/Database/DatabaseConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/database/DatabaseConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/Database/DatabaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/database/DatabaseHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/Database/Filter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/database/Filter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/Database/FilterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/database/FilterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/Database/SFA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/database/SFA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/Database/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/database/Settings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/Features/DatabaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/DatabaseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/Features/RZ.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/RZ.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/Features/Slip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/Slip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/Features/StageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/StageHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +66,9 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\durub\IdeaProjects\Intern-Duru" />
       <recent name="C:\Users\durub\IdeaProjects\Intern-Duru\src\main\java\com\example\internduru" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.example.internduru" />
     </key>
   </component>
   <component name="RunManager">

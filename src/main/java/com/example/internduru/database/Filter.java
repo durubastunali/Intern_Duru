@@ -1,6 +1,6 @@
-package com.example.internduru.Database;
+package com.example.internduru.database;
 
-import com.example.internduru.Features.DatabaseController;
+import com.example.internduru.features.DatabaseController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -20,11 +20,14 @@ import java.util.Map;
 public class Filter {
 
     private final VBox fileLayout;
-    private final boolean showSales, showEdits, showCancel;
+    private final boolean showSales;
+    private final boolean showEdits;
+    private final boolean showCancel;
 
     private final ArrayList<String> departmentNames = new ArrayList<>();
     private final Map<Integer, String> productNamesMap = new HashMap<>();
 
+    //7'den fazla parametre alıyor, doğru değil ama işlemlerle ui elementi oluşturma ayrı olsun istedim
     public Filter(VBox fileLayout, String currentFilterType, String input, CheckBox showSales, CheckBox showEdits, CheckBox showCancel,
                   Label salesInfo, Label editInfo, Label cancelInfo) {
         this.showSales = showSales.isSelected();
@@ -43,6 +46,7 @@ public class Filter {
                 case ("NAME") -> sqlWhere = "WHERE s.name = '" + input + "'";
                 case ("VAT") -> sqlWhere = "WHERE s.vatRate = '" + input + "'";
                 case ("PLU") -> sqlWhere = "WHERE s.name = '" + productNamesMap.get(Integer.parseInt(input)) + "'";
+                default -> sqlWhere = "";
             }
         }
         VBox layoutTable = new VBox(10);
@@ -114,11 +118,7 @@ public class Filter {
                 totalPrice += price;
             }
 
-
-            //Eğer miktar ve toplamı kendi başlıklarının altında aralarında space olacak şekilde basılsın isteniyorsa yorumları kaldırırımy
-            salesInfo.setText(showSales ? String.format("%d " +
-                    /* "%s " + */
-                    "- %.2f", totalQuantity, /* returnSpace(totalQuantity),*/ totalPrice) : "");
+            salesInfo.setText(showSales ? String.format("%d - %.2f", totalQuantity, totalPrice) : "");
 
             editInfo.setText(showEdits ? "0 - 0,00" : ""); // Bu değerleri nerden alacağımı bilmiyorum
             cancelInfo.setText(showCancel ? "0 - 0,00" : ""); // Bu değerleri nerden alacağımı bilmiyorum
@@ -151,14 +151,5 @@ public class Filter {
         for (Map<String, Object> row : productData) {
             productNamesMap.put((Integer) row.get("PLUNo"), (String) row.get("Name"));
         }
-    }
-
-    private String returnSpace (int quantity) { //8 karakter
-        String strQuantity = quantity + "";
-        String space = "";
-        for (int i = strQuantity.length(); i <= 8; i++) {
-            space += " ";
-        }
-        return space;
     }
 }

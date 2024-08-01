@@ -1,8 +1,9 @@
-package com.example.internduru.Features;
+package com.example.internduru.features;
 
-import com.example.internduru.Database.FilterController;
-import com.example.internduru.Database.SFA;
-import com.example.internduru.Database.Settings;
+import com.example.internduru.database.FilterController;
+import com.example.internduru.database.SFA;
+import com.example.internduru.database.Settings;
+import com.example.internduru.StageHandler;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -18,7 +19,6 @@ import java.util.function.Consumer;
 public class DatabaseController {
     private DatabaseScreenType currentScreen = DatabaseScreenType.DATABASE_MAIN;
     private final VBox mainLayout;
-    private final VBox fileLayout = new VBox(); //bu burda olmamalı ama şimdilik bilemedim
 
     private enum DatabaseScreenType {
         DATABASE_MAIN, SFA, SETTINGS, FILTER
@@ -73,9 +73,10 @@ public class DatabaseController {
     }
 
     private void updateButtonStyles(Button buttonSFA, Button buttonSettings, Button buttonFilter, DatabaseScreenType screenType) {
-        buttonSFA.setStyle(screenType == DatabaseScreenType.SFA ? "-fx-background-color: #0073e6; -fx-text-fill: white;" : "");
-        buttonSettings.setStyle(screenType == DatabaseScreenType.SETTINGS ? "-fx-background-color: #0073e6; -fx-text-fill: white;" : "");
-        buttonFilter.setStyle(screenType == DatabaseScreenType.FILTER ? "-fx-background-color: #0073e6; -fx-text-fill: white;" : "");
+        String style = "-fx-background-color: #0073e6; -fx-text-fill: white;";
+        buttonSFA.setStyle(screenType == DatabaseScreenType.SFA ? style : "");
+        buttonSettings.setStyle(screenType == DatabaseScreenType.SETTINGS ? style : "");
+        buttonFilter.setStyle(screenType == DatabaseScreenType.FILTER ? style : "");
     }
 
     public static void printTable (TableView<Map<String, Object>> table, Map<String, String> columnMappings){

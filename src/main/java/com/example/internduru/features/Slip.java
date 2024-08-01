@@ -1,6 +1,6 @@
-package com.example.internduru.Features;
+package com.example.internduru.features;
 
-import com.example.internduru.Database.DatabaseConnector;
+import com.example.internduru.StageHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
@@ -17,10 +17,12 @@ import org.json.JSONObject;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 public class Slip {
 
@@ -44,11 +46,12 @@ public class Slip {
         Path resourcesDirectory = Paths.get("resources");
         String path = resourcesDirectory + "\\ej\\slips";
 
-        try {
-            Files.walk(Paths.get(path))
-                    .filter(Files::isRegularFile) //Klasörleri seçmeden sadece dosyaları al
-                    .filter(file -> file.toString().endsWith(".json")) //Aldığı dosyaların uzantısı .json olsun
-                    .forEach(slipFiles::add); //Filtreden geçen tüm dosyaları slipFiles listesine ekle
+
+        try (Stream<Path> stream = Files.walk(Paths.get(path))) { //Bunu kullanmam önerildi
+            //Resource exhaustionı önlemek için .walk ile erişilen dosyalar Stream kullanılarak kapatılmalı : to free up system resources
+            stream.filter(Files::isRegularFile) // Klasörleri seçmeden sadece dosyaları al
+                    .filter(file -> file.toString().endsWith(".json")) // Aldığı dosyaların uzantısı .json olsun
+                    .forEach(slipFiles::add); // Filtreden geçen tüm dosyaları slipFiles listesine ekle
             if (!slipFiles.isEmpty()) {
                 slipFiles.forEach(file -> {
                     String fileName = file.toString().substring(path.length() + 1);
@@ -67,6 +70,7 @@ public class Slip {
         } catch (IOException e) {
             StageHandler.setWarning("Klasöre erişim sağlanamadı", e.getMessage());
         }
+
     }
 
     //Kullanılmayan yorumdaki değerler tüm dosyalarda 0
@@ -75,7 +79,7 @@ public class Slip {
 
         //UTF-8 diye belirtmeden Gradle'a geçince UTF-8 algılamadı?
         String content;
-        try (InputStreamReader reader = new InputStreamReader(new FileInputStream(inputPath), "UTF-8");
+        try (InputStreamReader reader = new InputStreamReader(new FileInputStream(inputPath), StandardCharsets.UTF_8);
              BufferedReader bufferedReader = new BufferedReader(reader)) {
             StringBuilder sb = new StringBuilder();
             String line;
@@ -86,8 +90,19 @@ public class Slip {
         }
 
         JSONArray slip = new JSONArray(content);
-        String align = null, font = null, style = null, type, value;
-        int height = 0, width = 0, level, lineHeight, offset;
+
+        String align = null;
+        String font = null;
+        String style = null;
+        String type;
+        String value;
+        int height = 0;
+        int width = 0;
+
+        int level;
+        int lineHeight;
+        int offset;
+
         boolean lineFeed = false;
         for (int i = 0; i < slip.length(); i++) {
             JSONObject item = slip.getJSONObject(i);
@@ -112,72 +127,100 @@ public class Slip {
     }
 
 
-    private void printSlip(String align, String type, String value, boolean lineFeed, int width, int height, String font, String style, VBox root) {
+    private void printSlip(String align, String type, String value, boolean lineFeed, int width, int height, String font, String style, VBox root){
         Font smallFont = new Font(12); //3x
         Font middleFont = new Font(16); //4x
         Font largeFont = new Font(20); //5x
 
+        switch (type) {
+            case "TEXT" -> handleTextType(align, value, lineFeed, font, style, root, smallFont, middleFont, largeFont);
+            case "PAPERSKIP" -> handlePaperSkipType(root);
+            case "IMAGE" -> handleImageType(value, width, height, root);
+        }
+    }
+
+    private void handleTextType(String align, String value, boolean lineFeed, String font, String style, VBox root, Font smallFont, Font middleFont, Font largeFont) {
+        HBox labelBox = createLabelBox(align, value, font, style, smallFont, middleFont, largeFont);
+
+        if (lineFeed) {
+            addLabelsToRoot(root, labelBox);
+        } else {
+            labels.add(labelBox);
+        }
+    }
+
+    private HBox createLabelBox(String align, String value, String font, String style, Font smallFont, Font middleFont, Font largeFont) {
         HBox labelBox = new HBox(10);
         labelBox.setPrefWidth(270);
 
+        Label label = new Label(value.trim());
+        setLabelFont(label, font, smallFont, middleFont, largeFont);
+
+        if (style.equals("bold")) {
+            label.setStyle("-fx-font-weight: bold;");
+        }
+
+        setLabelAlignment(labelBox, align);
+        labelBox.getChildren().add(label);
+
+        return labelBox;
+    }
+
+    private void setLabelFont(Label label, String font, Font smallFont, Font middleFont, Font largeFont) {
+        switch (font) {
+            case "small" -> label.setFont(smallFont);
+            case "normal" -> label.setFont(middleFont);
+            case "large" -> label.setFont(largeFont);
+        }
+    }
+
+    private void setLabelAlignment(HBox labelBox, String align) {
+        switch (align) {
+            case "center" -> labelBox.setAlignment(Pos.CENTER);
+            case "right" -> labelBox.setAlignment(Pos.CENTER_RIGHT);
+            case "left" -> labelBox.setAlignment(Pos.CENTER_LEFT);
+        }
+    }
+
+    private void addLabelsToRoot(VBox root, HBox labelBox) {
+        HBox hBox = new HBox(10);
+        labels.add(labelBox);
+        for (int i = labels.size() - 1; i >= 0; i--) {
+            if (labels.size() > 1) {
+                labels.get(i).setPrefWidth(135);
+            }
+            hBox.getChildren().add(labels.get(i));
+        }
+        root.getChildren().add(hBox);
+        labels.clear();
+    }
+
+    private void handlePaperSkipType(VBox root) {
+        Label label = new Label("");
+        root.getChildren().add(label);
+    }
+
+    private void handleImageType(String value, int width, int height, VBox root) {
         HBox imageBox = new HBox();
         imageBox.setMaxWidth(270);
         imageBox.setPadding(new Insets(10));
 
-        switch (type) {
-            case "TEXT" -> {
-                Label label = new Label(value.trim());
-                switch (font) {
-                    case "small" -> label.setFont(smallFont);
-                    case "normal" -> label.setFont(middleFont);
-                    case "large" -> label.setFont(largeFont);
-                }
-                if (style.equals("bold")) {
-                    label.setStyle("-fx-font-weight: bold;");
-                }
-                switch (align) {
-                    case "center" -> labelBox.setAlignment(Pos.CENTER);
-                    case "right" -> labelBox.setAlignment(Pos.CENTER_RIGHT);
-                    case "left" -> labelBox.setAlignment(Pos.CENTER_LEFT);
-                }
-                labelBox.getChildren().add(label);
-                if (lineFeed) {
-                    HBox hBox = new HBox(10);
-                    labels.add(labelBox);
-                    for (int i = labels.size() - 1; i >= 0; i--) {
-                        if (labels.size() > 1) {
-                            labels.get(i).setPrefWidth(135);
-                        }
-                        hBox.getChildren().add(labels.get(i));
-                    }
-                    root.getChildren().add(hBox);
-                    labels.clear();
-                } else {
-                    labels.add(labelBox);
-                }
-            }
-            case "PAPERSKIP" -> {
-                Label label = new Label("");
-                root.getChildren().add(label);
-            }
-            case "IMAGE" -> {
-                try {
-                    byte[] decodedBytes = hexStringToByteArray(value);
-                    BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(decodedBytes));
-                    Image image = bufferedImageToImage(bufferedImage);
-                    ImageView imageView = new ImageView(image);
+        try {
+            byte[] decodedBytes = hexStringToByteArray(value);
+            BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(decodedBytes));
+            Image image = bufferedImageToImage(bufferedImage);
+            ImageView imageView = new ImageView(image);
 
-                    imageView.setFitHeight(height);
-                    imageView.setFitWidth(width);
-                    imageBox.setAlignment(Pos.CENTER);
-                    imageBox.getChildren().add(imageView);
-                    root.getChildren().add(imageBox);
-                } catch (IOException e) {
-                    StageHandler.setWarning("Slip logosu oluşturulamadı", e.getMessage());
-                }
-            }
+            imageView.setFitHeight(height);
+            imageView.setFitWidth(width);
+            imageBox.setAlignment(Pos.CENTER);
+            imageBox.getChildren().add(imageView);
+            root.getChildren().add(imageBox);
+        } catch (IOException e) {
+            StageHandler.setWarning("Slip logosu oluşturulamadı", e.getMessage());
         }
     }
+
 
     private byte[] hexStringToByteArray(String hexString) {
         int len = hexString.length();

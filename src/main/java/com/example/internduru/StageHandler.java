@@ -1,5 +1,8 @@
-package com.example.internduru.Features;
+package com.example.internduru;
 
+import com.example.internduru.features.DatabaseController;
+import com.example.internduru.features.RZ;
+import com.example.internduru.features.Slip;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -49,7 +52,7 @@ public class StageHandler extends Application {
         primaryStage.show();
     }
 
-    public static void showMainMenu(VBox mainLayout) {
+    public void showMainMenu(VBox mainLayout) {
         buttonFileParser.setOnAction(event -> handleButtonAction(ScreenType.PARSER, buttonFileParser, buttonSlip, buttonDatabase, mainLayout, RZ::new));
         buttonSlip.setOnAction(event -> handleButtonAction(ScreenType.SLIP, buttonFileParser, buttonSlip, buttonDatabase, mainLayout, Slip::new));
         buttonDatabase.setOnAction(event -> handleButtonAction(ScreenType.DATABASE, buttonFileParser, buttonSlip, buttonDatabase, mainLayout, DatabaseController::new));

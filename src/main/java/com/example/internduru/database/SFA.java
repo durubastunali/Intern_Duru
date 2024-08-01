@@ -1,6 +1,6 @@
-package com.example.internduru.Database;
+package com.example.internduru.database;
 
-import com.example.internduru.Features.DatabaseController;
+import com.example.internduru.features.DatabaseController;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -35,18 +35,19 @@ public class SFA {
         VBox layoutTable = new VBox(10);
         layoutTable.setPadding(new Insets(0, 0, 25, 0));
 
-        String sqlQuery = "SELECT d.id, d.eDocNumber, \n" +
-                "CASE WHEN d.date IS NOT NULL AND d.date != '' \n" +
-                "THEN strftime('%d-%m-%Y', substr(d.date, 1, 4) || '-' || substr(d.date, 5, 2) || '-' || substr(d.date, 7, 2)) || ' ' || d.documentTime \n" +
-                "ELSE '' \n" +
-                "END AS dateTime, \n" +
-                "d.totalAmount / 1000.0 AS totalAmount, d.totalVat, \n" +
-                "SUM(CASE WHEN p.paymentType = 1 THEN p.amount ELSE 0 END) / 1000.0 AS cashAmount, \n" +
-                "SUM(CASE WHEN p.paymentType = 2 THEN p.amount ELSE 0 END) / 1000.0 AS creditAmount, \n" +
-                "SUM(CASE WHEN p.paymentType = 11 THEN p.amount ELSE 0 END) / 1000.0 AS chequeAmount \n" +
-                "FROM Documents d \n" +
-                "INNER JOIN Payments p ON p.documentId = d.id \n" +
-                "GROUP BY d.id, d.eDocNumber, d.date, d.totalAmount, d.totalVat\n";
+        String sqlQuery = """
+            SELECT d.id, d.eDocNumber,
+                CASE WHEN d.date IS NOT NULL AND d.date != ''
+                THEN strftime('%d-%m-%Y', substr(d.date, 1, 4) || '-' || substr(d.date, 5, 2) || '-' || substr(d.date, 7, 2)) || ' ' || d.documentTime
+                ELSE '' END AS dateTime,
+            d.totalAmount / 1000.0 AS totalAmount, d.totalVat,
+            SUM(CASE WHEN p.paymentType = 1 THEN p.amount ELSE 0 END) / 1000.0 AS cashAmount,
+            SUM(CASE WHEN p.paymentType = 2 THEN p.amount ELSE 0 END) / 1000.0 AS creditAmount,
+            SUM(CASE WHEN p.paymentType = 11 THEN p.amount ELSE 0 END) / 1000.0 AS chequeAmount
+            FROM Documents d
+                INNER JOIN Payments p ON p.documentId = d.id
+            GROUP BY d.id, d.eDocNumber, d.date, d.totalAmount, d.totalVat
+            """;
 
         ObservableList<Map<String, Object>> data = DatabaseHandler.executeCustomQuery(sqlQuery);
 
@@ -77,7 +78,7 @@ public class SFA {
                     if (eDocNumber != null) {
                         String[] splitParts = eDocNumber.split("-");
                         return new SimpleObjectProperty<>(splitParts.length > index ?
-                                Integer.parseInt(splitParts[index].replaceAll("[^0-9]", "")) : "");
+                                Integer.parseInt(splitParts[index].replaceAll("\\D", "")) : "");
                     }
                     return new SimpleObjectProperty<>("");
                 });

@@ -3,8 +3,6 @@
 
 package com.example.internduru;
 
-import com.example.internduru.Features.StageHandler;
-
 public class Main { //JAR dosyası olarak export edebilmek için herhangi bir şey extendlemeyen, main metodu içeren class lazım
                      //bu classla jar başlatılıyor
     public static void main(String[] args) {

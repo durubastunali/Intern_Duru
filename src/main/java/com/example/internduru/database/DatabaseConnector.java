@@ -1,6 +1,6 @@
-package com.example.internduru.Database;
+package com.example.internduru.database;
 
-import com.example.internduru.Features.StageHandler;
+import com.example.internduru.StageHandler;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,6 +8,8 @@ import java.sql.SQLException;
 
 public class DatabaseConnector {
     private static String url;
+
+    private DatabaseConnector() { }
 
     public static void setUrl(String dbUrl) {
         url = "jdbc:sqlite:" + dbUrl;

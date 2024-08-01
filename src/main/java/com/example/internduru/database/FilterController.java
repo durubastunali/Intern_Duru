@@ -1,4 +1,4 @@
-package com.example.internduru.Database;
+package com.example.internduru.database;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 
 public class FilterController {
 
+    private static final String STYLE = "-fx-font-weight: bold";
     private final VBox mainLayout;
     private String currentFilterType = "NAME";
 
@@ -27,7 +28,7 @@ public class FilterController {
         TextField filterText = new TextField();
         Button listButton = new Button("Listele");
 
-        labelCommand.setStyle("-fx-font-weight: bold");
+        labelCommand.setStyle(STYLE);
 
 
         CheckBox sales = new CheckBox("Satış");
@@ -61,7 +62,7 @@ public class FilterController {
         Button buttonVAT = new Button("KDV");
         Button buttonPLU = new Button("PLU");
 
-        filter.setStyle("-fx-font-weight: bold");
+        filter.setStyle(STYLE);
 
 
         setButtonActions(buttonName, buttonVAT, buttonPLU, labelCommand);
@@ -82,10 +83,8 @@ public class FilterController {
         Label labelFilter = new Label("Filtreler");
         Label amountTotal = new Label("Miktar - Toplam");
 
-        labelFilter.setStyle("-fx-font-weight: bold");
-        amountTotal.setStyle("-fx-font-weight: bold");
-
-
+        labelFilter.setStyle(STYLE);
+        amountTotal.setStyle(STYLE);
 
         layoutCheckBox.getChildren().addAll(labelFilter, sales, edit, cancel);
         layoutAmountTotal.getChildren().addAll(amountTotal, salesInfo, editInfo, cancelInfo);

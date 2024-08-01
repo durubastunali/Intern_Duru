@@ -1,6 +1,6 @@
-package com.example.internduru.Database;
+package com.example.internduru.database;
 
-import com.example.internduru.Features.DatabaseController;
+import com.example.internduru.features.DatabaseController;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -33,9 +33,11 @@ public class Settings {
         VBox layoutTable = new VBox(10);
         layoutTable.setPadding(new Insets(0, 0, 25, 0));
 
-        String sqlQuery = "SELECT p.PLUNo, p.Name as pName, p.Price, d.Name as dName, p.ProductCategory, p.Barcode, p.IsWeighable\n" +
-                "FROM PRODUCT p\n" +
-                "INNER JOIN DEPARTMENT d on d.DepartmentNo = p.DepartmentIndex";
+        String sqlQuery = """
+            SELECT p.PLUNo, p.Name as pName, p.Price, d.Name as dName, p.ProductCategory, p.Barcode, p.IsWeighable
+            FROM PRODUCT p
+            INNER JOIN DEPARTMENT d on d.DepartmentNo = p.DepartmentIndex
+        """;
 
         ObservableList<Map<String, Object>> data = DatabaseHandler.executeCustomQuery(sqlQuery);
 

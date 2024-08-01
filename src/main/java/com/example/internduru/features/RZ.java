@@ -1,5 +1,6 @@
-package com.example.internduru.Features;
+package com.example.internduru.features;
 
+import com.example.internduru.StageHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -21,9 +22,22 @@ import java.util.List;
 public class RZ {
 
     private final VBox mainLayout;
-    private String urunAdi, odemeTipi, fiscalNo, logoLines = "";
-    private int fisNo, ekuNo, zNo, maliFisSayisi, satisFisiSayisi, maliRaporSayisi;
-    private double toplamFisTutari, kdvOrani, nakitTutari, kasaNakitTutari, eftTutari, kasaKrediTutari;
+    private String urunAdi;
+    private String odemeTipi;
+    private String fiscalNo;
+    private String logoLines = "";
+    private int fisNo;
+    private int ekuNo;
+    private int zNo;
+    private int maliFisSayisi;
+    private int satisFisiSayisi;
+    private int maliRaporSayisi;
+    private double toplamFisTutari;
+    private double kdvOrani;
+    private double nakitTutari;
+    private double kasaNakitTutari;
+    private double eftTutari;
+    private double kasaKrediTutari;
     private Date tarih;
     private LocalTime saat;
     private final List<Path> files = new ArrayList<>();
@@ -75,7 +89,8 @@ public class RZ {
     private HBox createInfoBox(String input) {
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd-MM-yyyy");
         HBox hbox = new HBox(10);
-        Label headers = new Label(), info = new Label();
+        Label headers = new Label();
+        Label info = new Label();
         if (input.charAt(0) == 'r') {
             headers = new Label("""
                     Tarih:
@@ -178,7 +193,9 @@ public class RZ {
     private void parseRFile(String fileContent) {
         setCommonHeaders(fileContent);
         String[] lines = fileContent.split("\n");
-        String index, nextIndex, value;
+        String index;
+        String nextIndex;
+        String value;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
         for (String line : lines) {
             String[] splitLines = line.split("\\s+");
@@ -214,8 +231,12 @@ public class RZ {
     private void parseZFile(String fileContent) {
         setCommonHeaders(fileContent);
         String[] lines = fileContent.split("\n");
-        String[] splitLines, splitLinesNext;
-        String index, nextIndex, key, value = "";
+        String[] splitLines;
+        String[] splitLinesNext;
+        String index;
+        String nextIndex;
+        String key;
+        String value = "";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
         for (int i = 0; i < lines.length; i++) {
@@ -254,16 +275,15 @@ public class RZ {
                         case ("-SATIŞ FİŞLERİ") -> satisFisiSayisi = Integer.parseInt(value);
                         case ("-MALİ RAPORLAR") -> maliRaporSayisi = Integer.parseInt(value);
                     }
-                } if (j + 3 < splitLines.length) {
-                    if ((splitLines[j] + " " + splitLines[j + 1] + " " + splitLines[j + 2]).contains("MALİ FİŞ SAYISI")) {
-                        maliFisSayisi = Integer.parseInt(splitLines[j + 3]);
-                    }
+                } if (j + 3 < splitLines.length && (splitLines[j] + " " + splitLines[j + 1] + " " + splitLines[j + 2]).contains("MALİ FİŞ SAYISI")) {
+                    maliFisSayisi = Integer.parseInt(splitLines[j + 3]);
+
                 }
             }
         }
     }
 
     private int returnParseInt(String line) {
-        return Integer.parseInt(line.replaceAll("[^0-9]", ""));
+        return Integer.parseInt(line.replaceAll("\\D", ""));
     }
 }
