@@ -22,7 +22,6 @@ public class StageHandler extends Application {
 
     private static ScreenType currentScreen = ScreenType.MAIN;
     private static int maxWidth;
-    private static Button buttonFileParser, buttonSlip, buttonDatabase;
 
     private enum ScreenType {
         MAIN, PARSER, SLIP, DATABASE
@@ -35,12 +34,8 @@ public class StageHandler extends Application {
     @Override
     public void start(Stage primaryStage) {
         VBox mainLayout = new VBox();
-        buttonFileParser = new Button("Z - R Dosya");
-        buttonSlip = new Button("Slip");
-        buttonDatabase = new Button("Database");
 
         setMenuLayout(mainLayout);
-        showMainMenu(mainLayout);
 
         Screen screen = Screen.getPrimary();
         double width = screen.getBounds().getWidth();
@@ -52,7 +47,29 @@ public class StageHandler extends Application {
         primaryStage.show();
     }
 
-    public void showMainMenu(VBox mainLayout) {
+    public static void setMenuLayout(VBox mainLayout) {
+        Button buttonFileParser = new Button("Z - R Dosya");
+        Button buttonSlip = new Button("Slip");
+        Button buttonDatabase = new Button("Database");
+        showMainMenu(mainLayout, buttonFileParser, buttonSlip, buttonDatabase);
+
+        double width1 = new Text(buttonFileParser.getText()).getLayoutBounds().getWidth();
+        double width2 = new Text(buttonSlip.getText()).getLayoutBounds().getWidth();
+        double width3 = new Text(buttonDatabase.getText()).getLayoutBounds().getWidth();
+
+        maxWidth = (int) Math.max(width1, Math.max(width2, width3)) + 20;
+        buttonFileParser.setPrefWidth(maxWidth);
+        buttonSlip.setPrefWidth(maxWidth);
+        buttonDatabase.setPrefWidth(maxWidth);
+
+        HBox menuBar = new HBox(10);
+        menuBar.getChildren().addAll(buttonFileParser, buttonSlip, buttonDatabase);
+        menuBar.setPadding(new Insets(30));
+        menuBar.setStyle("-fx-background-color: #151515;");
+        mainLayout.getChildren().add(menuBar);
+    }
+
+    public static void showMainMenu(VBox mainLayout,  Button buttonFileParser, Button buttonSlip, Button buttonDatabase) {
         buttonFileParser.setOnAction(event -> handleButtonAction(ScreenType.PARSER, buttonFileParser, buttonSlip, buttonDatabase, mainLayout, RZ::new));
         buttonSlip.setOnAction(event -> handleButtonAction(ScreenType.SLIP, buttonFileParser, buttonSlip, buttonDatabase, mainLayout, Slip::new));
         buttonDatabase.setOnAction(event -> handleButtonAction(ScreenType.DATABASE, buttonFileParser, buttonSlip, buttonDatabase, mainLayout, DatabaseController::new));
@@ -71,26 +88,10 @@ public class StageHandler extends Application {
     }
 
     private static void updateButtonStyles(Button buttonFileParser, Button buttonSlip, Button buttonDatabase, ScreenType screenType) {
-        buttonFileParser.setStyle(screenType == ScreenType.PARSER ? "-fx-background-color: #0073e6; -fx-text-fill: white;" : "");
-        buttonSlip.setStyle(screenType == ScreenType.SLIP ? "-fx-background-color: #0073e6; -fx-text-fill: white;" : "");
-        buttonDatabase.setStyle(screenType == ScreenType.DATABASE ? "-fx-background-color: #0073e6; -fx-text-fill: white;" : "");
-    }
-
-    public static void setMenuLayout(VBox mainLayout) {
-        double width1 = new Text(buttonFileParser.getText()).getLayoutBounds().getWidth();
-        double width2 = new Text(buttonSlip.getText()).getLayoutBounds().getWidth();
-        double width3 = new Text(buttonDatabase.getText()).getLayoutBounds().getWidth();
-
-        maxWidth = (int) Math.max(width1, Math.max(width2, width3)) + 20;
-        buttonFileParser.setPrefWidth(maxWidth);
-        buttonSlip.setPrefWidth(maxWidth);
-        buttonDatabase.setPrefWidth(maxWidth);
-
-        HBox menuBar = new HBox(10);
-        menuBar.getChildren().addAll(buttonFileParser, buttonSlip, buttonDatabase);
-        menuBar.setPadding(new Insets(30));
-        menuBar.setStyle("-fx-background-color: #151515;");
-        mainLayout.getChildren().add(menuBar);
+        String style = "-fx-background-color: #0073e6; -fx-text-fill: white;";
+        buttonFileParser.setStyle(screenType == ScreenType.PARSER ? style : "");
+        buttonSlip.setStyle(screenType == ScreenType.SLIP ? style : "");
+        buttonDatabase.setStyle(screenType == ScreenType.DATABASE ? style : "");
     }
 
     public static void setFileLayout(VBox mainLayout, VBox fileLayout, ComboBox<String> fileComboBox, String feature) {
@@ -99,10 +100,8 @@ public class StageHandler extends Application {
         searchLayout.setPadding(new Insets(0, 30, 30, 30));
         searchLayout.setStyle("-fx-background-color: #151515;");
 
-
         Label chooseFileLabel = new Label(feature + " dosyası seçin:");
         chooseFileLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: #ffffff; -fx-font-weight: bold;");
-
 
         Text text = new Text(chooseFileLabel.getText());
         text.setStyle(chooseFileLabel.getStyle());
@@ -110,7 +109,7 @@ public class StageHandler extends Application {
         text.applyCss();
 
         int labelWidth = (int) text.getLayoutBounds().getWidth();
-        fileComboBox.setPrefWidth(maxWidth * 3 - labelWidth + 10);
+        fileComboBox.setPrefWidth((double) maxWidth * 3 - labelWidth + 10);
 
         searchLayout.getChildren().addAll(chooseFileLabel, fileComboBox);
         fileLayout.setPadding(new Insets(30));

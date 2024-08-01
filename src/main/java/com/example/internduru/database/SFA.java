@@ -30,7 +30,7 @@ public class SFA {
 
         Path resourcesDirectory = Paths.get("resources");
         String dbPath = resourcesDirectory + "\\db\\SFA_DB";
-        DatabaseConnector.setUrl(dbPath);
+        DatabaseConnector.setUrl(dbPath); //Dosyaya tekrar tekrar bağlanılması mantıklı değil. Zaten DB değişmiyor, bir kez bağlanılıp data çekilse yeterli
 
         VBox layoutTable = new VBox(10);
         layoutTable.setPadding(new Insets(0, 0, 25, 0));

@@ -54,7 +54,6 @@ public class Filter {
         filter(layoutTable, salesInfo, editInfo, cancelInfo, sqlWhere);
     }
 
-
     private void filter(VBox layoutTable, Label salesInfo, Label editInfo, Label cancelInfo, String sqlWhere) {
 
         Path resourcesDirectory = Paths.get("resources");
