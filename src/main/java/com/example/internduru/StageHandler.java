@@ -1,3 +1,5 @@
+//Ana menü butonları kendi arasında renk değiştirmiyor
+
 package com.example.internduru;
 
 import com.example.internduru.features.DatabaseController;
