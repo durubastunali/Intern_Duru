@@ -20,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class RZ {
 
@@ -61,15 +62,15 @@ public class RZ {
         Path resourcesDirectory = Paths.get("resources");
         String path = resourcesDirectory + "\\ej\\z";
 
-        try {
-            Files.walk(Paths.get(path)) //directoryde ve alt directorylerinde gez
-                    .filter(Files::isRegularFile) //klasörleri seçmeden sadece dosyaları seç
-                    .forEach(files::add); //bulduğu her dosyayı files'a atsın
+        try (Stream<Path> walk = Files.walk(Paths.get(path))) {
+            walk.filter(Files::isRegularFile)
+                    .forEach(files::add);
             if (!files.isEmpty()) {
-                files.forEach(file -> fileComboBox.getItems().add(file.toString().substring(path.length() + 1))); //her bir dosyanın adını combobox'a ekle
+                files.forEach(file -> fileComboBox.getItems().add(file.toString().substring(path.length() + 1)));
+
                 fileComboBox.setOnAction(event -> {
                     if (fileComboBox.getValue() != null) {
-                        openFileInfo(path+ "\\" + fileComboBox.getValue(), fileLayout);
+                        openFileInfo(path + "\\" + fileComboBox.getValue(), fileLayout);
                     }
                 });
             }
@@ -139,16 +140,16 @@ public class RZ {
     }
 
     private HBox createLogoLinesBox(String input) {
-        Label header_ll = new Label("Logo Lines:");
+        Label headerLabel = new Label("Logo Lines:");
         if (input.charAt(0) == 'r') {
-            header_ll.setPrefWidth(110);
+            headerLabel.setPrefWidth(110);
         } else if (input.charAt(0) == 'z') {
-            header_ll.setPrefWidth(180);
+            headerLabel.setPrefWidth(180);
         }
-        header_ll.setStyle("-fx-font-weight: bold;");
-        Label label_ll = new Label(logoLines);
+        headerLabel.setStyle("-fx-font-weight: bold;");
+        Label logoLinesLabel = new Label(logoLines);
         HBox hbox = new HBox(10);
-        hbox.getChildren().addAll(header_ll, label_ll);
+        hbox.getChildren().addAll(headerLabel, logoLinesLabel);
         return hbox;
     }
 
@@ -176,14 +177,16 @@ public class RZ {
 
     private void setCommonHeaders(String fileContent) {
         int endOfLogoLine = 0;
+        StringBuilder logoLinesBuilder = new StringBuilder();
         String[] lines = fileContent.split("\n");
-        for (int i = 0; i < lines.length; i++) {
-            logoLines += lines[i].substring(3) + "\n";
+        for (int i = 0; i < lines.length - 2; i++) { // Adjusted to prevent ArrayIndexOutOfBoundsException
+            logoLinesBuilder.append(lines[i].substring(3)).append("\n");
             if (lines[i + 2].contains("SAAT")) {
                 endOfLogoLine = i;
                 break;
             }
         }
+        logoLines = logoLinesBuilder.toString(); // Convert StringBuilder to String
         SimpleDateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy");
         try {
             tarih = inputFormat.parse(lines[endOfLogoLine + 1].substring(3, 13));
@@ -195,93 +198,120 @@ public class RZ {
     private void parseRFile(String fileContent) {
         setCommonHeaders(fileContent);
         String[] lines = fileContent.split("\n");
-        String index;
-        String nextIndex;
-        String value;
+        String token;
+        String nextToken;
+        String value = "";
+        String key;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        for (String line : lines) {
-            String[] splitLines = line.split("\\s+");
+        String[] splitLines;
+
+        for (int i = 0; i < lines.length; i++) {
+            splitLines = lines[i].split("\\s+");
+
             for (int j = 0; j < splitLines.length; j++) {
-                index = splitLines[j];
-                if (j + 2 < splitLines.length) {
-                    nextIndex = index + " " + splitLines[j + 1];
-                    value = splitLines[j + 2];
-                    switch (nextIndex) {
-                        case ("FİŞ NO:") -> fisNo = returnParseInt(value);
-                        case ("111EKÜ NO:") -> ekuNo = returnParseInt(value);
-                        case ("Z NO:") -> zNo = returnParseInt(value);
-                    }
-                } if (j + 1 < splitLines.length) {
+                token = splitLines[j];
+                key = token;
+
+                //şans eseri tutuyormuş gibi geldi
+                if (j + 1 < splitLines.length) {
                     value = splitLines[j + 1];
-                    switch (index) {
-                        case ("122TOP") -> toplamFisTutari = Double.parseDouble(value.substring(1).replace(',', '.'));
-                        case ("111SAAT") -> saat = LocalTime.parse(value.substring(1), formatter);
-                        case ("111uF") -> fiscalNo = value.substring(2);
-                    }
-                } if (index.contains("%") && j - 1 >= 0) {
-                    urunAdi = splitLines[j - 1].substring(3);
-                    kdvOrani = Double.parseDouble(index.substring(1));
                 }
-                switch (index) {
-                    case ("111NAKİT") -> odemeTipi = "NAKİT";
-                    case ("111EFT-POS") -> odemeTipi = "EFT-POS";
+
+                if (j + 2 < splitLines.length) { //Burada value değeri bozulur mu? Bozulmaz gibi geldi
+                    nextToken = splitLines[j + 1];
+                    key = token + " " + nextToken; //şunun işi karıştırıyor olması lazım galiba
+                    value = splitLines[j + 2];
                 }
+
+                setRFileInfo(key, value, formatter, splitLines, j);
             }
         }
     }
 
+    private void setRFileInfo(String key, String value, DateTimeFormatter formatter, String[] splitLines, int j) {
+        switch (key) {
+            case ("FİŞ NO:") -> fisNo = returnParseInt(value);
+            case ("111EKÜ NO:") -> ekuNo = returnParseInt(value);
+            case ("Z NO:") -> zNo = returnParseInt(value);
+            case ("122TOP") -> toplamFisTutari = Double.parseDouble(value.substring(1).replace(',', '.'));
+            case ("111SAAT") -> saat = LocalTime.parse(value.substring(1), formatter);
+            case ("111uF") -> fiscalNo = value.substring(2);
+            case ("111NAKİT") -> odemeTipi = "NAKİT";
+            case ("111EFT-POS") -> odemeTipi = "EFT-POS";
+        }
+        if (key.contains("%") && j - 1 >= 0) {
+            urunAdi = splitLines[j - 1].substring(3);
+            kdvOrani = Double.parseDouble(key.substring(1));
+        }
+    }
+
+    //Çok daha readable oldu ama bir yerde patlar gibi duruyor
     private void parseZFile(String fileContent) {
         setCommonHeaders(fileContent);
         String[] lines = fileContent.split("\n");
         String[] splitLines;
-        String[] splitLinesNext;
-        String index;
-        String nextIndex;
+        String[] splitLinesNext = new String[0];
+
+        String index = "";
+        String nextIndex = "";
         String key;
+        String multikey = "";
+
         String value = "";
+        String nextValue = "";
+        String nextLineValue = "";
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
         for (int i = 0; i < lines.length; i++) {
             splitLines = lines[i].split("\\s+");
+            if (i + 1 < lines.length) {
+                splitLinesNext = lines[i + 1].split("\\s+");
+            }
+
             for (int j = 0; j < splitLines.length; j++) {
                 index = splitLines[j];
-                if (i + 1 < lines.length) {
-                    splitLinesNext = lines[i + 1].split("\\s+");
-                    if (j + 1 < splitLines.length && splitLinesNext.length > 2) {
-                        nextIndex = splitLines[j + 1];
-                        value = splitLinesNext[2];
-                        key = index + " " + nextIndex;
-                        switch (key) {
-                            case ("111NAKİT TAHSİLAT") -> nakitTutari = Double.parseDouble(value.substring(1));
-                            case ("111**KASA NAKİT**") -> kasaNakitTutari = Double.parseDouble(value.substring(1));
-                            case ("KASA KREDİ") -> kasaKrediTutari = Double.parseDouble(value.substring(1));
-                        }
-                    } else if (index.equals("111EFTPOS")) {
-                        eftTutari = Double.parseDouble(value.substring(1));
-                    }
-                } if (j + 1 < splitLines.length) {
-                    nextIndex = splitLines[j + 1];
-                    switch (index) {
-                        case ("111SAAT") -> saat = LocalTime.parse(nextIndex.substring(1), formatter);
-                        case ("111uF") -> fiscalNo = nextIndex.substring(2);
-                        case ("122TOP") -> toplamFisTutari = Double.parseDouble((nextIndex.replace(".", "")).replace(",", "."));
-                    }
-                } if (j + 2 < splitLines.length) {
-                    nextIndex = splitLines[j + 1];
-                    key = index + " " + nextIndex;
-                    value = splitLines[j + 2];
-                    switch (key) {
-                        case ("FİŞ NO:") -> fisNo = returnParseInt(value);
-                        case ("111EKÜ NO:") -> ekuNo = returnParseInt(value);
-                        case ("Z NO:") -> zNo = returnParseInt(value);
-                        case ("-SATIŞ FİŞLERİ") -> satisFisiSayisi = Integer.parseInt(value);
-                        case ("-MALİ RAPORLAR") -> maliRaporSayisi = Integer.parseInt(value);
-                    }
-                } if (j + 3 < splitLines.length && (splitLines[j] + " " + splitLines[j + 1] + " " + splitLines[j + 2]).contains("MALİ FİŞ SAYISI")) {
-                    maliFisSayisi = Integer.parseInt(splitLines[j + 3]);
+                key = index;
+                nextIndex = "";
 
+                if (j + 1 < splitLines.length) {
+                    nextIndex = splitLines[j + 1];
+                    value = nextIndex;
                 }
+
+                if (splitLinesNext.length > 2) {
+                    nextLineValue = splitLinesNext[2];
+                    multikey = index + " " + nextIndex;
+                }
+
+                if (j + 2 < splitLines.length) {
+                    multikey = index + " " + nextIndex;
+                    nextValue = splitLines[j + 2];
+                }
+
+                setZFileInfo(key, multikey, value, nextValue, nextLineValue, formatter);
             }
+        }
+    }
+
+    private void setZFileInfo(String key, String multikey, String value, String nextValue, String nextLineValue, DateTimeFormatter formatter) {
+        switch (key) {
+            case ("111SAAT") -> saat = LocalTime.parse(value.substring(1), formatter);
+            case ("111uF") -> fiscalNo = value.substring(2);
+            case ("122TOP") -> toplamFisTutari = Double.parseDouble((value.replace(".", "")).replace(",", "."));
+        }
+
+        switch (multikey) {
+            case ("111NAKİT TAHSİLAT") -> nakitTutari = Double.parseDouble(nextLineValue.substring(1));
+            case ("111**KASA NAKİT**") -> kasaNakitTutari = Double.parseDouble(nextLineValue.substring(1));
+            case ("KASA KREDİ") -> kasaKrediTutari = Double.parseDouble(nextLineValue.substring(1));
+            case ("111EFTPOS ") -> eftTutari = Double.parseDouble(nextLineValue.substring(1));
+            case ("FİŞ NO:") -> fisNo = returnParseInt(nextValue);
+            case ("111EKÜ NO:") -> ekuNo = returnParseInt(nextValue);
+            case ("Z NO:") -> zNo = returnParseInt(nextValue);
+            case ("-SATIŞ FİŞLERİ") -> satisFisiSayisi = Integer.parseInt(nextValue);
+            case ("-MALİ RAPORLAR") -> maliRaporSayisi = Integer.parseInt(nextValue);
+            case ("FİŞ SAYISI") -> maliFisSayisi = Integer.parseInt(nextValue);
         }
     }
 

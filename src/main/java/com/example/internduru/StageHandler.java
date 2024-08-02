@@ -23,7 +23,9 @@ public class StageHandler extends Application {
 
     private static ScreenType currentScreen = ScreenType.MAIN;
     private static int maxWidth;
-    private static Button buttonFileParser, buttonSlip, buttonDatabase;
+    private static Button buttonFileParser = new Button("R-Z Dosyası");
+    private static Button buttonSlip = new Button("Slip");
+    private static Button buttonDatabase = new Button("Database");
 
     private enum ScreenType {
         MAIN, PARSER, SLIP, DATABASE
@@ -36,9 +38,7 @@ public class StageHandler extends Application {
     @Override
     public void start(Stage primaryStage) {
         VBox mainLayout = new VBox();
-        buttonFileParser = new Button("R-Z Dosyası");
-        buttonSlip = new Button("Slip");
-        buttonDatabase = new Button("Database");
+
 
         setMenuLayout(mainLayout);
         showMainMenu(mainLayout);
@@ -72,9 +72,10 @@ public class StageHandler extends Application {
     }
 
     private static void updateButtonStyles(Button buttonFileParser, Button buttonSlip, Button buttonDatabase, ScreenType screenType) {
-        buttonFileParser.setStyle(screenType == ScreenType.PARSER ? "-fx-background-color: #0073e6; -fx-text-fill: white;" : "");
-        buttonSlip.setStyle(screenType == ScreenType.SLIP ? "-fx-background-color: #0073e6; -fx-text-fill: white;" : "");
-        buttonDatabase.setStyle(screenType == ScreenType.DATABASE ? "-fx-background-color: #0073e6; -fx-text-fill: white;" : "");
+        String style = "-fx-background-color: #0073e6; -fx-text-fill: white;";
+        buttonFileParser.setStyle(screenType == ScreenType.PARSER ? style : "");
+        buttonSlip.setStyle(screenType == ScreenType.SLIP ? style : "");
+        buttonDatabase.setStyle(screenType == ScreenType.DATABASE ? style : "");
     }
 
     public static void setMenuLayout(VBox mainLayout) {
@@ -111,7 +112,7 @@ public class StageHandler extends Application {
         text.applyCss();
 
         int labelWidth = (int) text.getLayoutBounds().getWidth();
-        fileComboBox.setPrefWidth(maxWidth * 3 - labelWidth + 10);
+        fileComboBox.setPrefWidth((double) maxWidth * 3 - labelWidth + 10);
 
         searchLayout.getChildren().addAll(chooseFileLabel, fileComboBox);
         fileLayout.setPadding(new Insets(30));
