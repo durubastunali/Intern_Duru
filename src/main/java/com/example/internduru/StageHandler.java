@@ -48,7 +48,7 @@ public class StageHandler extends Application {
         double height = screen.getBounds().getHeight() - 70;
         Scene mainMenuScene = new Scene(mainLayout, width, height);
 
-        primaryStage.setTitle("App");
+        primaryStage.setTitle("Hugin");
         primaryStage.setScene(mainMenuScene);
         primaryStage.show();
     }
