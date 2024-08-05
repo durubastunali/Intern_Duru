@@ -2,7 +2,6 @@
 
 package com.example.internduru.features;
 
-import com.example.internduru.StageHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;

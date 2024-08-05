@@ -1,4 +1,4 @@
-package com.example.internduru;
+package com.example.internduru.features;
 
 import com.example.internduru.features.DatabaseController;
 import com.example.internduru.features.RZ;
@@ -38,7 +38,6 @@ public class StageHandler extends Application {
     @Override
     public void start(Stage primaryStage) {
         VBox mainLayout = new VBox();
-
 
         setMenuLayout(mainLayout);
         showMainMenu(mainLayout);

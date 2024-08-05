@@ -1,6 +1,6 @@
 package com.example.internduru.database;
 
-import com.example.internduru.StageHandler;
+import com.example.internduru.features.StageHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

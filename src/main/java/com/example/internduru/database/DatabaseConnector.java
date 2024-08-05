@@ -1,6 +1,6 @@
 package com.example.internduru.database;
 
-import com.example.internduru.StageHandler;
+import com.example.internduru.features.StageHandler;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

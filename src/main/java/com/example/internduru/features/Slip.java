@@ -1,6 +1,5 @@
 package com.example.internduru.features;
 
-import com.example.internduru.StageHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;

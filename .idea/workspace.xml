@@ -10,8 +10,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bff072e9-03c6-41a6-b7f1-6a46f00a38a0" name="Changes" comment="JDK17'den 21'e alındı">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/Launcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/StageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/StageHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/database/DatabaseConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/database/DatabaseConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/database/DatabaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/database/DatabaseHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/DatabaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/DatabaseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/RZ.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/RZ.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/Slip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/Slip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +79,7 @@
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="openjdk-21" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="com.example.internduru.StageHandler" />
+      <option name="MAIN_CLASS_NAME" value="com.example.internduru.features.StageHandler" />
       <module name="Intern-Duru.main" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -95,6 +103,7 @@
       <workItem from="1722415735117" duration="838000" />
       <workItem from="1722424036482" duration="5497000" />
       <workItem from="1722516515706" duration="1974000" />
+      <workItem from="1722862720325" duration="1095000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />

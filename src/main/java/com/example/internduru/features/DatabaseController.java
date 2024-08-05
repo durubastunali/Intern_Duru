@@ -3,7 +3,6 @@ package com.example.internduru.features;
 import com.example.internduru.database.FilterController;
 import com.example.internduru.database.SFA;
 import com.example.internduru.database.Settings;
-import com.example.internduru.StageHandler;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
