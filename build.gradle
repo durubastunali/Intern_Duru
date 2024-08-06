@@ -24,7 +24,6 @@ java {
 }
 
 
-
 tasks.withType(JavaCompile) {
   options.encoding = 'UTF-8'
 }
@@ -85,8 +84,6 @@ jlink {
     name = 'app'
   }
 }
-
-
 
 jlinkZip {
   group = 'distribution'
