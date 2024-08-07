@@ -10,10 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bff072e9-03c6-41a6-b7f1-6a46f00a38a0" name="Changes" comment="JDK17'den 21'e alındı">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Intern_Duru_main_jar.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/TCP.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/Launcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/RZ.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/RZ.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/StageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/StageHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +54,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.4103036&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;,
@@ -99,6 +100,10 @@
       <workItem from="1722516515706" duration="1974000" />
       <workItem from="1722862720325" duration="1095000" />
       <workItem from="1722924466132" duration="772000" />
+      <workItem from="1722967611448" duration="111000" />
+      <workItem from="1722968893748" duration="15000" />
+      <workItem from="1723006935776" duration="19000" />
+      <workItem from="1723011904606" duration="15330000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />

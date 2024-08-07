@@ -50,7 +50,7 @@ public class RZ {
         setLayout();
     }
 
-    public void setLayout() {
+    private void setLayout() {
         VBox fileLayout = new VBox();
         ComboBox<String> fileComboBox = new ComboBox<>();
         StageHandler.setFileLayout(mainLayout, fileLayout, fileComboBox, "R - Z");
