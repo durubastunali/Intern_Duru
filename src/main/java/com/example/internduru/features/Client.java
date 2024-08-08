@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -43,13 +44,17 @@ public class Client {
         new Thread(() -> {
             try {
                 socket = new Socket("192.168.50.154", serverPort);
-                BufferedReader bufferedReaderInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                PrintWriter outputClient = new PrintWriter(socket.getOutputStream(), true);
+                PrintWriter inputServer = new PrintWriter(socket.getOutputStream(), true);
+                BufferedReader outputServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-                String messageToSend = tfData.getText();
-                outputClient.println(messageToSend);
+                JSONObject jsonMessage = new JSONObject();
+                jsonMessage.put("messageType", tfMessageType.getText());
+                jsonMessage.put("value", tfData.getText());
 
-                String textFromServer = bufferedReaderInput.readLine();
+                inputServer.println(jsonMessage);
+
+                String textFromServer = outputServer.readLine();
+                System.out.println("TEXT:" + textFromServer);
                 Platform.runLater(() -> {
                     sent.setText(tfData.getText());
                     received.setText(textFromServer);

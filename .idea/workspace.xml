@@ -9,10 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bff072e9-03c6-41a6-b7f1-6a46f00a38a0" name="Changes" comment="Client Socket açıldı, Server'a bağlanıldı. Hi dediğinde Hello dönüyor, bye dediğinde Goodbye dönüyor.">
+    <list default="true" id="bff072e9-03c6-41a6-b7f1-6a46f00a38a0" name="Changes" comment="Client - Server">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/StageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/StageHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/TCP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/Client.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +101,7 @@
       <workItem from="1722968893748" duration="15000" />
       <workItem from="1723006935776" duration="19000" />
       <workItem from="1723011904606" duration="15578000" />
-      <workItem from="1723097150565" duration="579000" />
+      <workItem from="1723097150565" duration="5692000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -192,7 +191,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723041836298</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Client - Server">
+      <option name="closed" value="true" />
+      <created>1723097821427</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1723097821427</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,7 +220,8 @@
     <MESSAGE value="R ve Z dosyası okuma metodu daha readable yapıldı ama çok güvenilir hala gelmiyor. StageHandler'daki bazı kodlar düzeltildi." />
     <MESSAGE value="JDK17'den 21'e alındı" />
     <MESSAGE value="Client Socket açıldı, Server'a bağlanıldı. Hi dediğinde Hello dönüyor, bye dediğinde Goodbye dönüyor." />
-    <option name="LAST_COMMIT_MESSAGE" value="Client Socket açıldı, Server'a bağlanıldı. Hi dediğinde Hello dönüyor, bye dediğinde Goodbye dönüyor." />
+    <MESSAGE value="Client - Server" />
+    <option name="LAST_COMMIT_MESSAGE" value="Client - Server" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
