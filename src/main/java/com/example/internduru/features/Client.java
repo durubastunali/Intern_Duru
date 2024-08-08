@@ -19,10 +19,9 @@ import java.net.Socket;
 
 public class Client {
 
-    private VBox mainLayout;
-    private Button buttonSend = new Button("Send");
+    private final VBox mainLayout;
+    private final Button buttonSend = new Button("Send");
 
-    private int serverPort = 1234;
     private Socket socket = null;
     private TextField tfMessageType = new TextField();
     private TextField tfData = new TextField();
@@ -43,13 +42,13 @@ public class Client {
     private void connect() {
         new Thread(() -> {
             try {
-                socket = new Socket("192.168.50.154", serverPort);
+                socket = new Socket("192.168.50.154", 1234);
                 PrintWriter inputServer = new PrintWriter(socket.getOutputStream(), true);
                 BufferedReader outputServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
                 JSONObject clientMessage = new JSONObject();
                 clientMessage.put("messageType", tfMessageType.getText());
-                clientMessage.put("value", tfData.getText());
+                clientMessage.put("value", stringToHex(tfData.getText()));
 
                 inputServer.println(clientMessage);
 
@@ -61,7 +60,7 @@ public class Client {
 
                 Platform.runLater(() -> {
                     sent.setText(tfData.getText());
-                    received.setText(value);
+                    received.setText(hexToString(value));
                 });
 
             } catch (IOException e) {
@@ -69,6 +68,24 @@ public class Client {
                 StageHandler.setWarning("Server Connection Failed", e.getMessage());
             }
         }).start();
+    }
+
+    private String hexToString(String hex) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < hex.length(); i += 2) {
+            String hexPair = hex.substring(i, i + 2);
+            int decimal = Integer.parseInt(hexPair, 16);
+            result.append((char) decimal);
+        }
+        return result.toString();
+    }
+
+    private String stringToHex(String input) {
+        StringBuilder hexString = new StringBuilder();
+        for (char character : input.toCharArray()) {
+            hexString.append(String.format("%02X", (int) character));
+        }
+        return hexString.toString();
     }
 
     private void setLayout() {
