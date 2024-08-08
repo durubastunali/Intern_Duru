@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bff072e9-03c6-41a6-b7f1-6a46f00a38a0" name="Changes" comment="Client - Server">
+    <list default="true" id="bff072e9-03c6-41a6-b7f1-6a46f00a38a0" name="Changes" comment="Server'a String yerine {messageType, value} JSON objesi gönderiliyor.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/Client.java" afterDir="false" />
     </list>
@@ -101,7 +101,7 @@
       <workItem from="1722968893748" duration="15000" />
       <workItem from="1723006935776" duration="19000" />
       <workItem from="1723011904606" duration="15578000" />
-      <workItem from="1723097150565" duration="5692000" />
+      <workItem from="1723097150565" duration="8132000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -199,7 +199,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723097821427</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Server'a String yerine {messageType, value} JSON objesi gönderiliyor.">
+      <option name="closed" value="true" />
+      <created>1723104100673</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1723104100673</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,7 +229,8 @@
     <MESSAGE value="JDK17'den 21'e alındı" />
     <MESSAGE value="Client Socket açıldı, Server'a bağlanıldı. Hi dediğinde Hello dönüyor, bye dediğinde Goodbye dönüyor." />
     <MESSAGE value="Client - Server" />
-    <option name="LAST_COMMIT_MESSAGE" value="Client - Server" />
+    <MESSAGE value="Server'a String yerine {messageType, value} JSON objesi gönderiliyor." />
+    <option name="LAST_COMMIT_MESSAGE" value="Server'a String yerine {messageType, value} JSON objesi gönderiliyor." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

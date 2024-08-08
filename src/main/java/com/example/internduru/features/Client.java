@@ -47,17 +47,21 @@ public class Client {
                 PrintWriter inputServer = new PrintWriter(socket.getOutputStream(), true);
                 BufferedReader outputServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-                JSONObject jsonMessage = new JSONObject();
-                jsonMessage.put("messageType", tfMessageType.getText());
-                jsonMessage.put("value", tfData.getText());
+                JSONObject clientMessage = new JSONObject();
+                clientMessage.put("messageType", tfMessageType.getText());
+                clientMessage.put("value", tfData.getText());
 
-                inputServer.println(jsonMessage);
+                inputServer.println(clientMessage);
 
                 String textFromServer = outputServer.readLine();
-                System.out.println("TEXT:" + textFromServer);
+                JSONObject serverResponse = new JSONObject(textFromServer);
+
+                String value = serverResponse.getString("value");
+                String messageType = serverResponse.getString("messageType");
+
                 Platform.runLater(() -> {
                     sent.setText(tfData.getText());
-                    received.setText(textFromServer);
+                    received.setText(value);
                 });
 
             } catch (IOException e) {
@@ -66,7 +70,6 @@ public class Client {
             }
         }).start();
     }
-
 
     private void setLayout() {
         HBox fileLayout = new HBox(10);
