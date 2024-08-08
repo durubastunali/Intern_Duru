@@ -1,7 +1,6 @@
 package com.example.internduru.features;
 
 import javafx.application.Platform;
-import javafx.event.Event;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -15,11 +14,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.ConnectException;
 import java.net.Socket;
-import java.net.SocketAddress;
 
-public class TCP {
+public class Client {
 
     private VBox mainLayout;
     private Button buttonSend = new Button("Send");
@@ -32,17 +29,14 @@ public class TCP {
     private Label received = new Label("NONE");
 
 
-    public TCP(VBox mainLayout) {
+    public Client(VBox mainLayout) {
         this.mainLayout = mainLayout;
         startConnection();
     }
 
     private void startConnection() {
         setLayout();
-
-        buttonSend.setOnAction(event -> {
-            connect();
-        });
+        buttonSend.setOnAction(event -> connect());
     }
 
     private void connect() {
@@ -52,7 +46,6 @@ public class TCP {
                 BufferedReader bufferedReaderInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 PrintWriter outputClient = new PrintWriter(socket.getOutputStream(), true);
 
-                // Example message to send; you can replace this with input from a text field
                 String messageToSend = tfData.getText();
                 outputClient.println(messageToSend);
 
@@ -80,8 +73,6 @@ public class TCP {
 
         Label labelMessageType = new Label("Message Type:");
         Label labelData = new Label("Data:");
-
-
 
         String boldStyle = "-fx-font-weight: bold;";
         String underlineStyle = "-fx-underline: true;";

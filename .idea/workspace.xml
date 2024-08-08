@@ -9,12 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bff072e9-03c6-41a6-b7f1-6a46f00a38a0" name="Changes" comment="JDK17'den 21'e alındı">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/TCP.java" afterDir="false" />
+    <list default="true" id="bff072e9-03c6-41a6-b7f1-6a46f00a38a0" name="Changes" comment="Client Socket açıldı, Server'a bağlanıldı. Hi dediğinde Hello dönüyor, bye dediğinde Goodbye dönüyor.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/RZ.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/RZ.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/StageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/StageHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/TCP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/internduru/features/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +101,8 @@
       <workItem from="1722967611448" duration="111000" />
       <workItem from="1722968893748" duration="15000" />
       <workItem from="1723006935776" duration="19000" />
-      <workItem from="1723011904606" duration="15330000" />
+      <workItem from="1723011904606" duration="15578000" />
+      <workItem from="1723097150565" duration="579000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <option name="closed" value="true" />
@@ -185,7 +184,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722606064581</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Client Socket açıldı, Server'a bağlanıldı. Hi dediğinde Hello dönüyor, bye dediğinde Goodbye dönüyor.">
+      <option name="closed" value="true" />
+      <created>1723041836298</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1723041836298</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,7 +212,8 @@
     <MESSAGE value="StageHandler eski versiyonuna alındı. Tuşların renk değiştirmemesi sorunu çözüldü." />
     <MESSAGE value="R ve Z dosyası okuma metodu daha readable yapıldı ama çok güvenilir hala gelmiyor. StageHandler'daki bazı kodlar düzeltildi." />
     <MESSAGE value="JDK17'den 21'e alındı" />
-    <option name="LAST_COMMIT_MESSAGE" value="JDK17'den 21'e alındı" />
+    <MESSAGE value="Client Socket açıldı, Server'a bağlanıldı. Hi dediğinde Hello dönüyor, bye dediğinde Goodbye dönüyor." />
+    <option name="LAST_COMMIT_MESSAGE" value="Client Socket açıldı, Server'a bağlanıldı. Hi dediğinde Hello dönüyor, bye dediğinde Goodbye dönüyor." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

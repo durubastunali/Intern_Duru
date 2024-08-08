@@ -1,9 +1,5 @@
 package com.example.internduru.features;
 
-import com.example.internduru.features.DatabaseController;
-import com.example.internduru.features.RZ;
-import com.example.internduru.features.Slip;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
@@ -26,10 +22,10 @@ public class StageHandler extends Application {
     private static Button buttonFileParser = new Button("R-Z Dosyası");
     private static Button buttonSlip = new Button("Slip");
     private static Button buttonDatabase = new Button("Database");
-    private static Button buttonSocket = new Button("TCP");
+    private static Button buttonSocket = new Button("Server");
 
     private enum ScreenType {
-        MAIN, PARSER, SLIP, DATABASE, TCP
+        MAIN, PARSER, SLIP, DATABASE, CLIENT
     }
 
     public static void main(String[] args) {
@@ -57,7 +53,7 @@ public class StageHandler extends Application {
         buttonFileParser.setOnAction(event -> handleButtonAction(ScreenType.PARSER, mainLayout, RZ::new));
         buttonSlip.setOnAction(event -> handleButtonAction(ScreenType.SLIP, mainLayout, Slip::new));
         buttonDatabase.setOnAction(event -> handleButtonAction(ScreenType.DATABASE, mainLayout, DatabaseController::new));
-        buttonSocket.setOnAction(event -> handleButtonAction(ScreenType.TCP, mainLayout, TCP::new));
+        buttonSocket.setOnAction(event -> handleButtonAction(ScreenType.CLIENT, mainLayout, Client::new));
     }
 
     private static void handleButtonAction(ScreenType screenType, VBox mainLayout, Consumer<VBox> screenConstructor) {
@@ -77,7 +73,7 @@ public class StageHandler extends Application {
         buttonFileParser.setStyle(screenType == ScreenType.PARSER ? style : "");
         buttonSlip.setStyle(screenType == ScreenType.SLIP ? style : "");
         buttonDatabase.setStyle(screenType == ScreenType.DATABASE ? style : "");
-        buttonSocket.setStyle(screenType == ScreenType.TCP ? style : "");
+        buttonSocket.setStyle(screenType == ScreenType.CLIENT ? style : "");
 
     }
 
